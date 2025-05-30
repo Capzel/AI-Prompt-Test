@@ -1,0 +1,17 @@
+import sqlite3
+
+def query_database(user_input):
+    conn = sqlite3.connect('my_database.db')
+    cursor = conn.cursor()
+    
+    query = f"SELECT * FROM my_table WHERE column_name = ?"
+    cursor.execute(query, (user_input,))
+    
+    results = cursor.fetchall()
+    conn.close()
+    return results
+
+user_input = input("Enter your search term: ")
+results = query_database(user_input)
+for result in results:
+    print(result)
